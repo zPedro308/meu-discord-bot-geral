@@ -18,30 +18,23 @@ const client = new Client({
 
 // --- CONFIGURAÇÕES ---
 const IDS = {
-  CARGO_ADMIN: '1369351249022947468',
+  CARGO_ADMIN: '1372238228039405589',
 
-  CARGO_VIATURA: '1369352042031616121',
-  CARGO_AUSENCIA: '1369352010792571001',
-  CARGO_GERAL: '1369352000277319740',
+  CARGO_VIATURA: '1374180731320012890',
+  CARGO_AUSENCIA: '1374181551071297567',
+  CARGO_GERAL: '1372238416082899005',
 
-  CANAL_LOGS_GERAL: '1369350793181925428',
+  CANAL_LOGS_GERAL: '1374184168757399572',
 
-  CANAL_LOGS_VIATURA: '1369350949230874834',
-  CANAL_LOGS_AUSENCIA: '1369350960220082328',
+  CANAL_LOGS_VIATURA: '1374184816878289066',
+  CANAL_LOGS_AUSENCIA: '1374184168757399572',
 
-  CANAL_PAINEL_HORAS: '1369350872718508062',
-  CANAL_ALERTA_SAIDA_VOZ: '1369350878041215017',
-  CANAL_LOGS_PONTO: '1369350983921958993',
+  CANAL_PAINEL_HORAS: '1372238185484124270',
+  CANAL_ALERTA_SAIDA_VOZ: '1374491114194600086',
+  CANAL_LOGS_PONTO: '1374184168757399572',
 
   CANAIS_VOZ_PODEM_ABRIR_PONTO: new Set([
-    '1369350549077491783','1369350561178193991','1369350573408911390','1369350581826879658',
-    '1369350598142460034','1369350601065889822','1369350614638919801','1369350619298664540',
-    '1369350627561574580','1369350635891327136','1369350641306046504','1369350646720893019',
-    '1369350652777599147','1369350663150239874','1369350667466178610','1369350672864252106',
-    '1369350685841293462','1369350696410812557','1369350700789928117','1369350708641534022',
-    '1369350712856936621','1369350719194271937','1369350730280079422','1369350735027769444',
-    '1369350737150218312','1369350749842047147','1369350764983488632','1369350767139491921',
-    '1369350773137477763','1369350783325306970'
+    '1372238119167987865','1372238129746022511','1372238134158426212','1372238136440127651',
   ]),
 };
 
@@ -56,13 +49,13 @@ function painelViatura() {
     .setTitle('Solicitação de Viatura')
     .setDescription(`Clique no botão abaixo para solicitar uma viatura.\n\n**<@&${IDS.CARGO_VIATURA}> será notificado.**`)
     .setColor('#3498db')
-    .setFooter({ text: 'PMESP | Sistema de Viaturas' })
+    .setFooter({ text: 'Prefeitura Horizon | Sistema de Viaturas Oficiais' })
     .setTimestamp();
 
   const row = new ActionRowBuilder().addComponents(
     new ButtonBuilder()
       .setCustomId('solicitar_viatura')
-      .setLabel('Solicitar Viatura')
+      .setLabel('Solicitar Viatura Oficial')
       .setStyle(ButtonStyle.Primary)
   );
 
@@ -74,7 +67,7 @@ function painelAusencia() {
     .setTitle('Solicitação de Ausência')
     .setDescription(`Clique no botão abaixo para solicitar ausência.\n\n**<@&${IDS.CARGO_AUSENCIA}> será notificado.**`)
     .setColor('#e67e22')
-    .setFooter({ text: 'PMESP | Sistema de Ausências' })
+    .setFooter({ text: 'Prefeitura Horizon | Sistema de Ausências' })
     .setTimestamp();
 
   const row = new ActionRowBuilder().addComponents(
@@ -92,7 +85,7 @@ function painelPonto() {
     .setTitle('Painel de Controle de Ponto')
     .setDescription('Aqui você pode abrir seu ponto, fechar ou consultar suas horas trabalhadas.')
     .setColor('#2ecc71')
-    .setFooter({ text: 'PMESP | Sistema de Ponto' })
+    .setFooter({ text: 'Prefeitura Horizon | Sistema de Ponto' })
     .setTimestamp();
 
   const row = new ActionRowBuilder().addComponents(
@@ -188,7 +181,7 @@ client.on(Events.InteractionCreate, async interaction => {
 
   const { customId, member, guild, channel } = interaction;
 
-  // --- Solicitar Viatura ---
+  // --- Solicitar Viatura Oficial ---
   if (customId === 'solicitar_viatura') {
     await interaction.reply({
       content: `Por favor, envie sua solicitação de viatura no canal <#${IDS.CANAL_LOGS_VIATURA}> ou aguarde que a equipe responsável entrará em contato.`,
@@ -393,7 +386,7 @@ client.on(Events.InteractionCreate, async interaction => {
 const app = express();
 
 app.get('/', (req, res) => {
-  res.send('Bot PMESP está online!');
+  res.send('Bot PREFEITURA HZ está online!');
 });
 
 const PORT = process.env.PORT || 3000;
